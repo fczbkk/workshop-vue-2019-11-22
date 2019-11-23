@@ -1,9 +1,6 @@
 <template>
-  <div class="home">
-    <h1>Home</h1>
-    <p>
-      <router-link :to="{name: 'categories'}">Go to categories</router-link>
-    </p>
+  <div>
+    <h1>Category detail {{ $route.params.category_id }}</h1>
     <ProductList :list="productsList" />
   </div>
 </template>
@@ -20,9 +17,13 @@
       }
     },
     beforeRouteEnter (to, from, next) {
-      fetch(`http://localhost:3000/highlighted`)
+      fetch(`http://localhost:3000/categories/${to.params.category_id}`)
         .then((response) => response.json())
         .then((data) => next((vm) => vm.productsList = data))
     }
   }
 </script>
+
+<style scoped>
+
+</style>
